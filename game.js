@@ -48,13 +48,13 @@ class Actor {
         writable: false,
         configurable: false
       });
-      Object.defineProperty(this, 'top', {
-        value : pos.y,
+      Object.defineProperty(this, 'right', {
+        value : pos.x + size.x,
         writable: false,
         configurable: false
       });
-      Object.defineProperty(this, 'right', {
-        value : pos.x + size.x,
+      Object.defineProperty(this, 'top', {
+        value : pos.y,
         writable: false,
         configurable: false
       });
@@ -64,25 +64,13 @@ class Actor {
         configurable: false
       });
     }
-    isIntersect(actor){
-        if (actor instanceof Actor) {
-            if (this === actor) {
-                return false;
-            }
-            if ((this.left != actor.left) && (this.top != actor.top) && (this.right != actor.right) && (this.bottom != actor.bottom)) {
-                return false;
-            } else {
-                if (this.left == actor.left || this.top == actor.top || this.right == actor.right || this.bottom == actor.bottom) {
-                    return false;
-                } else {
-                   if ((this.left > actor.left) && (this.top > actor.top) && (this.right > actor.right) && (this.bottom > actor.bottom)) {
-                        return true;
-                   }
-                }
-            }
-        }
-        else {
-            throw Error('NOT ACTOR');
-        }
-    }   
+    isIntersect(actor) {
+      if (!(actor instanceof Actor)) {
+          throw new Error('Передан не Actor');
+      }
+      if ((actor === this) || (actor.left >= this.right) || (actor.right <= this.left) || (actor.top >= this.bottom) || (actor.bottom <= this.top)) {
+      return false;
+      }
+      return true;
+  }
 }
