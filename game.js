@@ -66,7 +66,7 @@ class Actor {
     }
     isIntersect(actor) {
       if (!(actor instanceof Actor)) {
-          throw new Error('Передан не Actor');
+          throw Error('actor NOT ACTOR');
       }
       if ((actor === this) || (actor.left >= this.right) || (actor.right <= this.left) || (actor.top >= this.bottom) || (actor.bottom <= this.top)) {
       return false;
