@@ -69,11 +69,16 @@ class Actor {
             if (this === actor) {
                 return false;
             }
-            if (this.left != actor.left && this.top != actor.top && this.right != actor.right && this.bottom != actor.bottom) {
+            if ((this.left != actor.left) && (this.top != actor.top) && (this.right != actor.right) && (this.bottom != actor.bottom)) {
                 return false;
-            }
-            if (this.left == actor.left || this.top == actor.top || this.right == actor.right || this.bottom == actor.bottom) {
-                return false;
+            } else {
+                if (this.left == actor.left || this.top == actor.top || this.right == actor.right || this.bottom == actor.bottom) {
+                    return false;
+                } else {
+                   if ((this.left > actor.left) && (this.top > actor.top) && (this.right > actor.right) && (this.bottom > actor.bottom)) {
+                        return true;
+                   }
+                }
             }
         }
         else {
