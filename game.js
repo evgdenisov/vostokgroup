@@ -89,14 +89,26 @@ class Level {
       return false;
     }
   }
-  actorAt(actor) {
-    if (actor === undefined || !(actor instanceof Actor)) {
-      throw new Error(`actor NOT from Actors`);
+  actorAt(actor){
+    if (!(actor instanceof Actor)) {
+      throw new Error('arguments error');
+    }
+    if (this.actors.length === 0) {
+      return undefined;
     }
     else {
-      if (this.length === 0) {
+      if (this.actors.find(el => el.isIntersect(actor)) === false) {
         return undefined;
       }
+      else {
+        for (let i = 0; i < this.actors.length; i++) {
+          if (actor.isIntersect(this.actors[i])) {
+            return this.actors[i]
+          }
+        }
+      }
     }
+
+    //this.actors.filter(el => el.isIntersect(actor))
   }
 }
