@@ -55,7 +55,7 @@ class Actor {
     return this.pos.y + this.size.y;
   }
   isIntersect(actor) {
-    if (!(actor instanceof Actor) || actor === undefined) {
+    if (!(actor instanceof Actor)) {
       throw new Error('actor NOT ACTOR');
     }
     if ((actor === this) || (actor.left >= this.right) || (actor.right <= this.left) || (actor.top >= this.bottom) || (actor.bottom <= this.top)) {
@@ -65,7 +65,7 @@ class Actor {
   }
 }
 class Level {
-  constructor (grid, actors) {
+  constructor (grid = [], actors = []) {
     this.grid = grid;
     this.actors = actors;
     if (grid === undefined) {
@@ -93,22 +93,31 @@ class Level {
     if (!(actor instanceof Actor)) {
       throw new Error('arguments error');
     }
-    if (this.actors.length === 0) {
-      return undefined;
+    return this.actors.find(el => el.isIntersect(actor));
+  }
+  obstacleAt(newPos, size) {
+    if ((newPos.y < 0) || (newPos.x < 0) || ((newPos.x + size.x) > this.width))  {
+        return 'wall';
     }
-    else {
-      if (this.actors.find(el => el.isIntersect(actor)) === false) {
-        return undefined;
-      }
-      else {
-        for (let i = 0; i < this.actors.length; i++) {
-          if (actor.isIntersect(this.actors[i])) {
-            return this.actors[i]
-          }
-        }
-      }
+    else if ((newPos.y + size.y) > (this.height)) {
+       return 'lava';
+    }
+    let newActorPosition = new Actor(newPos, size);
+    let func = function (el) {
+     if  (newActorPosition.bottom >= el.top && newActorPosition.top <= el.bottom) {
+       return el;
+     }
+    }
+    let x = this.actors.find(el => func(el));
+    if (newActorPosition.right > x.left || newActorPosition.left < x.right) {
+      return 'wall';
+    }
+    if (newActorPosition.bottom > x.top) {
+      return 'lava';
     }
 
-    //this.actors.filter(el => el.isIntersect(actor))
+  }
+  removeActor(actor) {
+
   }
 }
