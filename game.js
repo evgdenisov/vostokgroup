@@ -117,19 +117,18 @@ class Level {
         topRight = new Vector(Math.ceil(newPos.x + size.x - 1), Math.floor(newPos.y)),
         bottomLeft = new Vector(Math.floor(newPos.x), Math.ceil(newPos.y + size.y - 1)),
         bottomRight = new Vector(Math.ceil(newPos.x + size.x -1), Math.ceil(newPos.y + size.y -1)),
-        points = [],
-        horPoints = topRight.x - topLeft.x,
-        vertPoints = bottomLeft.y - topLeft.y;
-    
-    for (let i = topLeft.y; (i <= vertPoints + topLeft.y); i++) {
-        for (let j = topLeft.x; (j <= horPoints + topLeft.x); j++) {
-          points.push(this.grid[i][j]);
+        dots = [],
+        horDots = topRight.x - topLeft.x,
+        vertDots = bottomLeft.y - topLeft.y;
+    for (let i = topLeft.y; (i <= vertDots + topLeft.y); i++) {
+        for (let j = topLeft.x; (j <= horDots + topLeft.x); j++) {
+          dots.push(this.grid[i][j]);
         }
     }
-    if (points.includes('lava')) {
+    if (dots.includes('lava')) {
       return 'lava';
     }
-    if (points.includes('wall')) {
+    if (dots.includes('wall')) {
       return 'wall';
     }
   }
