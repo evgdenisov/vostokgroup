@@ -118,11 +118,11 @@ class Level {
         bottomLeft = new Vector(Math.floor(newPos.x), Math.ceil(newPos.y + size.y - 1)),
         bottomRight = new Vector(Math.ceil(newPos.x + size.x -1), Math.ceil(newPos.y + size.y -1)),
         points = [],
-        horizontalPoints = topRight.x - topLeft.x,
-        verticalPoints = bottomLeft.y - topLeft.y;
+        horPoints = topRight.x - topLeft.x,
+        vertPoints = bottomLeft.y - topLeft.y;
     
-    for (let i = topLeft.y; (i <= verticalPoints + topLeft.y); i++) {
-        for (let j = topLeft.x; (j <= horizontalPoints + topLeft.x); j++) {
+    for (let i = topLeft.y; (i <= vertPoints + topLeft.y); i++) {
+        for (let j = topLeft.x; (j <= horPoints + topLeft.x); j++) {
           points.push(this.grid[i][j]);
         }
     }
@@ -157,5 +157,10 @@ class Level {
         this.status = 'won';
       }
     }
+  }
+}
+class LevelParser {
+  constructor () {
+
   }
 }
