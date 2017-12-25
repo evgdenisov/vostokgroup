@@ -77,10 +77,10 @@ class Level {
     }
     this.status = null;
     this.finishDelay = 1;
-    }
-    get player() {
-      return this.actors.find(actor => actor.type === 'player');
-    }
+  }
+  get player() {
+    return this.actors.find(actor => actor.type === 'player');
+  }
   isFinished() {
     if (this.status !== null && this.finishDelay < 0) {
       return true;
@@ -93,31 +93,69 @@ class Level {
     if (!(actor instanceof Actor)) {
       throw new Error('arguments error');
     }
-    return this.actors.find(el => el.isIntersect(actor));
+    if (this.actors.length <= 1) {
+        return undefined;
+    }
+    else {
+      for (let i = 0; i < this.actors.length; i++) {
+        if (this.actors[i].isIntersect !== undefined) {
+          if (this.actors[i].isIntersect(actor) === true) {
+            return this.actors[i];
+          }
+        }
+      }  
+    }
   }
   obstacleAt(newPos, size) {
     if ((newPos.y < 0) || (newPos.x < 0) || ((newPos.x + size.x) > this.width))  {
-        return 'wall';
-    }
-    else if ((newPos.y + size.y) > (this.height)) {
-       return 'lava';
-    }
-    let newActorPosition = new Actor(newPos, size);
-    let func = function (el) {
-     if  (newActorPosition.bottom >= el.top && newActorPosition.top <= el.bottom) {
-       return el;
-     }
-    }
-    let x = this.actors.find(el => func(el));
-    if (newActorPosition.right > x.left || newActorPosition.left < x.right) {
       return 'wall';
     }
-    if (newActorPosition.bottom > x.top) {
+    else if ((newPos.y + size.y) > (this.height)) {
       return 'lava';
     }
-
+    let topLeft = new Vector(Math.floor(newPos.x), Math.floor(newPos.y)),
+        topRight = new Vector(Math.ceil(newPos.x + size.x - 1), Math.floor(newPos.y)),
+        bottomLeft = new Vector(Math.floor(newPos.x), Math.ceil(newPos.y + size.y - 1)),
+        bottomRight = new Vector(Math.ceil(newPos.x + size.x -1), Math.ceil(newPos.y + size.y -1)),
+        points = [],
+        horizontalPoints = topRight.x - topLeft.x,
+        verticalPoints = bottomLeft.y - topLeft.y;
+    
+    for (let i = topLeft.y; (i <= verticalPoints + topLeft.y); i++) {
+        for (let j = topLeft.x; (j <= horizontalPoints + topLeft.x); j++) {
+          points.push(this.grid[i][j]);
+        }
+    }
+    if (points.includes('lava')) {
+      return 'lava';
+    }
+    if (points.includes('wall')) {
+      return 'wall';
+    }
   }
   removeActor(actor) {
-
+    this.actors = this.actors.filter(el => el !== actor);
+  }
+  noMoreActors(typeString) {
+    if (this.actors.length === 0) {
+      return true;
+    }
+    if  (this.actors.find(el => el.type === typeString) === undefined) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+  playerTouched(typeString, actor) {
+    if ((typeString == 'lava') || (typeString == 'fireball')) {
+      this.status = 'lost';
+    }
+    if ((typeString == 'coin') && (actor.type == 'coin')) {
+      this.removeActor(actor);
+      if (this.noMoreActors('coin')) {
+        this.status = 'won';
+      }
+    }
   }
 }
