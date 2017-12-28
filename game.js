@@ -159,7 +159,40 @@ class Level {
   }
 }
 class LevelParser {
-  constructor () {
-
+  constructor (dictionary) {
+    this.dictionary = dictionary;
+  }
+  actorFromSymbol (dictionarySymbol) {
+    if (dictionarySymbol === undefined) {
+      return undefined;
+    }
+    else {
+      return this.dictionary[dictionarySymbol];
+    }
+  }
+    obstacleFromSymbol (symbol) { 
+      switch (symbol) {
+        case 'x' :
+          return 'wall';
+        case '!' :
+          return 'lava';
+        default :
+          return undefined;
+      }
+    }
+    createGrid (levelString) {
+      if ((levelString === undefined) || (levelString == []) ) {
+        return [];
+      }
+      
+      let newLevelString = levelString.map(function(lowerString) {
+        let symbolArray = lowerString.split('');
+        for (let i = 0; i < symbolArray.length; i++) {
+          symbolArray[i] = this.obstacleFromSymbol(symbolArray[i]);
+        }
+        return symbolArray;
+      });
+      return newLevelString;  
+    });
   }
 }
