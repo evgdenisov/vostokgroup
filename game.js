@@ -193,6 +193,6 @@ class LevelParser {
         return symbolArray;
       });
       return newLevelString;  
-    });
-  }
+    };
+  
 }
