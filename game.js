@@ -37,8 +37,8 @@ class Actor {
     else {
       throw Error('speed not Vector');
     }
-    this.act = function act(){};
   }
+  act(){};
   get type() {
     return 'actor';
   }
@@ -64,6 +64,7 @@ class Actor {
       return true;
   }
 }
+
 class Level {
   constructor (grid = [], actors = []) {
     this.grid = grid;
@@ -106,30 +107,26 @@ class Level {
       }  
     }
   }
-  obstacleAt(newPos, size) {
-    if ((newPos.y < 0) || (newPos.x < 0) || ((newPos.x + size.x) > this.width))  {
+  obstacleAt(pos, size){
+    if (!(pos instanceof Vector) || !(size instanceof Vector)) {
+      throw Error('arguments error');
+    }
+    let startX = Math.floor(pos.x);
+    let endX   = Math.ceil(pos.x + size.x);
+    let startY = Math.floor(pos.y);
+    let endY   = Math.ceil(pos.y + size.y);
+    if (startX < 0 || endX > this.width || startY < 0) {
       return 'wall';
     }
-    else if ((newPos.y + size.y) > (this.height)) {
+    if (endY > this.height) {
       return 'lava';
     }
-    let topLeft = new Vector(Math.floor(newPos.x), Math.floor(newPos.y)),
-        topRight = new Vector(Math.ceil(newPos.x + size.x - 1), Math.floor(newPos.y)),
-        bottomLeft = new Vector(Math.floor(newPos.x), Math.ceil(newPos.y + size.y - 1)),
-        bottomRight = new Vector(Math.ceil(newPos.x + size.x -1), Math.ceil(newPos.y + size.y -1)),
-        dots = [],
-        horDots = topRight.x - topLeft.x,
-        vertDots = bottomLeft.y - topLeft.y;
-    for (let i = topLeft.y; (i <= vertDots + topLeft.y); i++) {
-        for (let j = topLeft.x; (j <= horDots + topLeft.x); j++) {
-          dots.push(this.grid[i][j]);
+    for (let y = startY; y < endY; y++) {
+      for (let x = startX; x < endX; x++) {
+        if (this.grid[y][x]) {
+          return this.grid[y][x];
         }
-    }
-    if (dots.includes('lava')) {
-      return 'lava';
-    }
-    if (dots.includes('wall')) {
-      return 'wall';
+      }
     }
   }
   removeActor(actor) {
@@ -158,6 +155,7 @@ class Level {
     }
   }
 }
+
 class LevelParser {
   constructor (dictionary) {
     this.dictionary = dictionary;
@@ -170,29 +168,141 @@ class LevelParser {
       return this.dictionary[dictionarySymbol];
     }
   }
-    obstacleFromSymbol (symbol) { 
-      switch (symbol) {
-        case 'x' :
-          return 'wall';
-        case '!' :
-          return 'lava';
-        default :
-          return undefined;
+  obstacleFromSymbol (symbol) { 
+    switch (symbol) {
+      case 'x' :
+        return 'wall';
+      case '!' :
+        return 'lava';
+      default :
+        return undefined;
       }
-    }
-    createGrid (levelString) {
-      if ((levelString === undefined) || (levelString == []) ) {
-        return [];
-      }
-      
-      let newLevelString = levelString.map(function(lowerString) {
-        let symbolArray = lowerString.split('');
-        for (let i = 0; i < symbolArray.length; i++) {
-          symbolArray[i] = this.obstacleFromSymbol(symbolArray[i]);
+  }
+  createGrid (plan) {
+    return plan.map(lowerString => {
+      return lowerString.split('').map(symbol => this.obstacleFromSymbol(symbol));
+    });
+  }
+  createActors(plan){
+    let actors = [];
+    let splittedArr = plan.map(el => el.split(''));
+    splittedArr.forEach((row, y) => {
+      row.forEach((cell, x) => {
+        if (this.dictionary && this.dictionary[cell] && typeof this.dictionary[cell] === 'function') {
+          let actor = new this.dictionary[cell] (new Vector(x, y));
+          if (actor instanceof Actor) {
+            actors.push(actor);
+          }
         }
-        return symbolArray;
       });
-      return newLevelString;  
-    };
-  
+    });
+    return actors;
+  }
+  parse (plan) {
+    return new Level (this.createGrid(plan), this.createActors(plan));
+  }
 }
+
+class Fireball extends Actor {
+  constructor (pos, speed) {
+    super(pos);
+    this.size = new Vector(1, 1);
+    this.speed = speed;
+  }
+  get type () {
+    return 'fireball';
+  }
+  getNextPosition(time = 1) {
+    return this.pos.plus(this.speed.times(time));
+  }
+  handleObstacle() {
+    this.speed = this.speed.times(-1);
+  }
+  act(time, level){
+    let nextPos = this.getNextPosition(time);
+    if (level.obstacleAt(nextPos, this.size)){
+      this.handleObstacle();
+    } 
+    else {
+      this.pos = nextPos;
+    }
+  }
+}
+
+class HorizontalFireball extends Fireball{
+  constructor(pos){
+    super(pos, new Vector(2, 0));
+  }
+}
+
+class VerticalFireball extends Fireball{
+  constructor(pos){
+    super(pos, new Vector(0, 2));
+  }
+}
+
+class FireRain extends Fireball{
+  constructor(pos){
+    super(pos,new Vector(0, 3));
+    this.startPos = pos;
+  }
+  handleObstacle(){
+    this.pos = this.startPos;
+  }
+}
+
+class Coin extends Actor{
+  constructor(pos = new Vector(0,0)){
+    super(pos.plus(new Vector(0.2,0.1)), new Vector(0.6,0.6));
+    this.post = this.pos;
+    this.springSpeed = 8;
+    this.springDist = 0.07;
+    this.spring = Math.random()*(2*Math.PI);
+  }
+
+  get type(){
+    return'coin';
+  }
+
+  updateSpring(time = 1){
+    this.spring = this.spring + this.springSpeed * time;
+  }
+
+  getSpringVector(){
+    return new Vector(0, Math.sin(this.spring) * this.springDist);
+  }
+
+  getNextPosition(time = 1){
+    this.updateSpring(time);
+    return this.post.plus(this.getSpringVector());
+  }
+
+  act(time){
+    this.pos = this.getNextPosition(time);
+  }
+}
+
+class Player extends Actor{
+  constructor(pos = new Vector(0,0)){
+    super(pos.plus(new Vector(0, -0.5)), new Vector(0.8, 1.5));
+  }
+
+  get type(){
+    return 'player';
+  }
+}
+
+const actorDict = {
+  '@': Player,
+  'v': FireRain,
+  '=': HorizontalFireball,
+  '|': VerticalFireball,
+  'o': Coin
+};
+
+const parser = new LevelParser(actorDict);
+
+runGame(schemas, parser, DOMDisplay)
+.then(() => console.log('Вы выиграли приз!'));
+
+
