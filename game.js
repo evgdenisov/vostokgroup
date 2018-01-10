@@ -302,6 +302,33 @@ const actorDict = {
 
 const parser = new LevelParser(actorDict);
 
+const schemas = [
+  [
+    '         ',
+    '         ',
+    '    =    ',
+    '       o ',
+    '     !xxx',
+    ' @       ',
+    'xxx!     ',
+    '         '
+  ],
+  [
+    '      v  ',
+    '    v    ',
+    '  v      ',
+    '        o',
+    '        x',
+    '@   x    ',
+    'x        ',
+    '         '
+  ]
+];
+const actorDict = {
+  '@': Player,
+  'v': FireRain
+}
+
 runGame(schemas, parser, DOMDisplay)
 .then(() => console.log('Вы выиграли приз!'));
 
