@@ -9,7 +9,7 @@ class Vector {
       return new Vector(this.x + vector.x, this.y + vector.y);
     }
     else {
-      throw Error('Можно прибавлять к вектору только вектор типа Vector');
+      throw new Error('Можно прибавлять к вектору только вектор типа Vector');
     }
   }
   times(multiplier) {
@@ -23,19 +23,19 @@ class Actor {
     this.pos = pos;
     }
     else {
-    throw Error('Pos not Vector');
+      throw new Error('Pos not Vector');
     }
     if (size instanceof Vector) {
     this.size = size;
     }
     else {
-      throw Error('size not Vector');
+      throw new Error('size not Vector');
     }
     if (speed instanceof Vector) {
     this.speed = speed;
     }
     else {
-      throw Error('speed not Vector');
+      throw new Error('speed not Vector');
     }
   }
   act(){};
@@ -94,22 +94,11 @@ class Level {
     if (!(actor instanceof Actor)) {
       throw new Error('arguments error');
     }
-    if (this.actors.length <= 1) {
-        return undefined;
-    }
-    else {
-      for (let i = 0; i < this.actors.length; i++) {
-        if (this.actors[i].isIntersect !== undefined) {
-          if (this.actors[i].isIntersect(actor) === true) {
-            return this.actors[i];
-          }
-        }
-      }  
-    }
+    return this.actors.find(el => el.isIntersect(actor));
   }
   obstacleAt(pos, size){
     if (!(pos instanceof Vector) || !(size instanceof Vector)) {
-      throw Error('arguments error');
+      throw new Error('arguments error');
     }
     let startX = Math.floor(pos.x);
     let endX   = Math.ceil(pos.x + size.x);
@@ -324,10 +313,6 @@ const schemas = [
     '         '
   ]
 ];
-const actorDict = {
-  '@': Player,
-  'v': FireRain
-}
 
 runGame(schemas, parser, DOMDisplay)
 .then(() => console.log('Вы выиграли приз!'));
