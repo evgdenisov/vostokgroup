@@ -1,0 +1,58 @@
+
+
+* { 
+    box-sizing:  border-box; 
+}
+
+body {
+
+}
+
+.main {
+    display: inline-block;
+    text-align: center;
+    width: 90%;
+    margin: 5%;
+    border: 2px solid DeepSkyBlue;
+    background: grey;
+    border-radius: 15px;
+    box-shadow: 0.4em 0.4em 5px dimgray;
+}
+.wrap {
+    width: 40%;
+    display: inline-block;
+    border: 2px solid DeepSkyBlue;
+    border-radius: 15px;
+    margin-bottom: 5%;
+    vertical-align: top;
+    box-shadow: 0.4em 0.4em 5px rgba(122,122,122,0.5);
+}
+.title {
+    display: inline-block;
+    width: 65%;
+    background: DeepSkyBlue;
+    border: 2px solid white;
+    border-radius: 15px;
+    box-shadow: 0.4em 0.4em 5px rgba(122,122,122,0.5);
+}
+.list {
+    display: inline-block;
+    list-style-type: none;
+    padding: 0;
+    border-radius: 15px;
+    min-width: 80%;
+}
+.list li {
+    display: inline-block;
+    min-width: 60%;
+    border: 2px solid white;
+    width: 80%;
+    border-radius: 15px;
+}
+.todo li {
+    background: DodgerBlue;
+}
+
+.done li {
+    background: rgb(33, 33, 33);
+}
