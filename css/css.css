@@ -1,58 +1,166 @@
 
-
 * { 
     box-sizing:  border-box; 
+    margin: 0;
+    padding: 0
 }
 
 body {
-
+    background: gray;
+    margin: 0px;
+    text-align: center;
+    background-image: url("./flowers1.jpg")
 }
 
-.main {
+
+html,body{
+    width: 100%;
+    height: 100%;
+    font-family: 'Lucida Sans Unicode'
+}
+
+.header {
+    position: relative;
+    z-index: 150;
+}
+
+
+
+.header-wrap {
+    display: inline-block;
+    position: relative;
+    min-width: 85%;
+    margin-top: 1%;
+    font-size: 0;
+}
+.header-left {
     display: inline-block;
     text-align: center;
-    width: 90%;
-    margin: 5%;
-    border: 2px solid DeepSkyBlue;
-    background: grey;
-    border-radius: 15px;
-    box-shadow: 0.4em 0.4em 5px dimgray;
+    width: 50%;
 }
-.wrap {
-    width: 40%;
+.header-right {
     display: inline-block;
-    border: 2px solid DeepSkyBlue;
-    border-radius: 15px;
-    margin-bottom: 5%;
-    vertical-align: top;
-    box-shadow: 0.4em 0.4em 5px rgba(122,122,122,0.5);
+    text-align: right;
+    width: 50%;
+    
 }
-.title {
+.header-btn {
     display: inline-block;
-    width: 65%;
-    background: DeepSkyBlue;
-    border: 2px solid white;
-    border-radius: 15px;
-    box-shadow: 0.4em 0.4em 5px rgba(122,122,122,0.5);
-}
-.list {
-    display: inline-block;
-    list-style-type: none;
-    padding: 0;
-    border-radius: 15px;
-    min-width: 80%;
-}
-.list li {
-    display: inline-block;
-    min-width: 60%;
-    border: 2px solid white;
-    width: 80%;
-    border-radius: 15px;
-}
-.todo li {
-    background: DodgerBlue;
+    min-width: 30%;
+    text-align: center;
+    font-size: 1.5rem;
+    color: white;
+    border-radius: 2rem;
+    margin: 0.2rem;
+    overflow: hidden;
+    padding-left: 0.2rem;
+    padding-right: 0.2rem;
 }
 
-.done li {
-    background: rgb(33, 33, 33);
+.header-btn:hover {
+    border-color: white;
+    color: black;
+    background: white;
+    cursor: pointer;
+    transition: all 0.7s ease
 }
+
+.main-wrap {
+    display: inline-block;
+    width: 85%;
+    position: relative;
+    min-height: 100%;
+    color: white;
+}
+
+.main-page {
+    width: 100%;
+}
+
+.logo {
+
+    font-size: 3em;
+}
+
+.main-text {
+    margin: 1.5rem;
+    padding: 1.5rem;
+    font-size: 1.3rem;
+}
+
+.hidden {
+    display: none;
+}
+
+
+.map {
+    display: inline-block;
+    border: 2px solid black;
+    padding: 1px;
+    border-radius: 7px;
+    margin-top: 2rem;
+}
+
+.content {
+    position: relative;
+    z-index: 150;
+}
+
+.contacts-wrap {
+    overflow: hidden;
+}
+
+
+.contacts-text {
+    display: inline-block;
+    text-align: left;
+}
+
+.vacancy-wrap {
+    text-align: left;
+    margin-left: 2rem;
+}
+
+.vacancy-wrap h2 {
+    text-align: center;
+}
+
+.background, .header-background {
+    display: inline-block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: black;
+    left: 0;
+    top: 0;
+    opacity: 0.9;
+    z-index: 1;
+    border-radius: 5px;
+}
+
+.current {
+    border-color: white;
+    color: black;
+    background: white;
+}
+
+.products-text {
+    text-align: left;
+    margin-left: 1.5em;
+}
+
+.yandex-disk {
+    width: 150px;
+}
+
+.yandex-disk:hover {
+    width: 200px;
+    transition: all 0.7s ease;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+    font-family: 'Lucida Sans Unicode'
+}
+

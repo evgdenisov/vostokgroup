@@ -4,17 +4,101 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>TodoList</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <title>ВостокГрупп</title>
   <link rel="stylesheet" href="./css/css.css">
 </head>
 <body>
-  <div id="wrapper">
+    <h1 class="logo">ВостокГрупп</h1>
+  <header class="header-wrap">
+    <div class="header-background"></div>
+    <div class="header-left header">
+      <span class="header-btn products">каталог</span>
+      <span class="header-btn about-product">о продукции</span>
+      <span></span>
+    </div>
+    <div class="header-right header">
+      <span class="header-btn vacancy">вакансии</span>
+      <span class="header-btn contacts">контакты</span>
+      <span class="header-btn about-us current">о нас</span>
+    </div>
+  </header>
+  <main class="main-wrap">
     
-  </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.1/react.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.1/react-dom.min.js"></script>
-  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-  <script src="./js/lol.js" type="text/babel"></script>
+    <section class="main-page">
+      <section class="background">
+      </section>
+      <section class="about-us-wrap content">
+        <h2>О компании</h2>
+        <p class="main-text">
+          "Востокгрупп"- одна из компаний на Российском рынке, занимающаяся оптовой торговлей азиатской косметикой.
+          
+          
+          Косметика с натуральными компонентами – это главный тренд последних лет и он продолжает активно набирать популярность, поэтому мы предлагаем широкий ассортимент кремов, бальзамов, сывороток, солей и масок на основе растительных экстрактов и масел. 
+          
+          Накопленный опыт работы в сфере продажи оптом позволяет успешно работать с различными группами потребителей. Долгосрочные партнерские отношения с поставщиками позволяют предлагать нашим клиентам хорошие цены и интересные условия работы. 
+          Миссия компании — содействовать достижению успеха клиента, снабжая товаром по выгодным ценам и точно в срок.
+        </p>
+      </section>
+      <section class="about-product-wrap hidden content">
+        <h2>О продукции</h2>
+        <p class="main-text">
+            Косметическая продукция
+            Оригинальные новаторские продукты для лица и тела в индивидуальной герметичной упаковке (саше), задающие новые направления в косметической отрасли. Высокое качество составов с большим содержанием полезных натуральных компонентов поддерживает лояльность потребителей на стабильно высоком уровне уже более 10 лет. Маски сохраняют восточные традиции и колорит, но полностью адаптированные для российских потребителей.
+            Косметика 4-поколения, изготовленная по международным стандартам качества в Южной Корее. Средства премиум-класса по уходу за лицом и телом в индивидуальных упаковках замедляющие ход неумолимого времени, созданные в синергии новейших разработок и многолетнего опыта в области эстетической косметологии.
+            Для самых современных энергичных молодых женщин и девушек. Оригинальные формы упаковок заметно выделяют продукты на полках. Интересные баночки в виде сочных фруктов и ягод не оставляют никого равнодушным. Яркие образы, ультрасовременные коллекции и уникальная подача продуктов, бесспорно, является сильным преимуществом среди конкурентов.
+        </p>
+      </section>
+      <section class="contacts-wrap hidden content">
+        <h2>Контакты</h2>
+        <div class="contacts-text">
+        <p><span>Адрес:</span> 119435, г. Москва, пер. Саввинский Б., дом. 9, строение 1, этаж 4, комната 24</p>
+        <p><span>E-mail:</span> vostokdal@list.ru</p>
+        <p><span>Телефон:</span> 8-926-167-22-98</p>
+        </div>
+        <div class="map">
+          <script class="yandex-map" type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Ab95a2e25f59f26879aefcbc1c29fc407e285259f75ea6a5047bf799c4fe01751&amp;width=577&amp;height=386&amp;lang=ru_RU&amp;scroll=true"></script>
+        </div>
+      </section>
+      <section class="vacancy-wrap hidden content">
+        <h2>Вакансии:</h2>
+        <h3>Менеджер в отдел оптовых продаж</h3>
+        <ul><h4>Требования:</h4>
+          <li>Опыт работы менеджером по работе с клиентами, менеджером по оптовым продажам от 1 года;</li>
+          <li>Уверенный пользователь ПК;</li>
+          <li>Опыт работы на рынке косметических товаров является преимуществом;</li>
+          <ul><h4>Личные качества:</h4>
+            <li>высокая коммуникабельность, стрессоустойчивость,</li>
+            <li>активная жизненная позиция, оптимизм, стрессоустойчивость,</li>
+            <li>коммуникабельность, умение убеждать и достигать поставленных целей.</li>
+          </ul>
+        </ul>
+        <ul><h4>Функции:</h4>
+          <li>Активные продажи по телефону (холодные звонки);</li>
+          <li>Поиск и привлечение новых клиентов по структуре сбыта;</li>
+          <li>Проведение переговоров;</li>
+          <li>Консультирование клиентов по специфике товаров;</li>
+          <li>формирование предложения по материалам;</li>
+          <li>расчет необходимого количества материалов;</li>
+          <li>обсуждение индивидуальных условий сделок (цены, сроки, условия поставки);</li>
+        </ul>
+        <ul><h4>Условия:</h4>
+          <li>График работы 5/2, 9.00-18.00;</li>
+          <li>Интересная работа в стабильной компании;</li>
+          <li>Перспективы карьерного и профессионального роста;</li>
+        </ul>
+      </section>
+      <section class="products-wrap hidden content">
+        <p>Каталог наших товаров вы можете скачать файлом</p>
+          <a href="https://yadi.sk/i/SJ7wH-Jq3YFaJu" target=_blank><img class="yandex-disk" src="./css/yandex.png"></a>
+      </section>
+    </section>
+    
+  </main>
+
+
+
+
+  
+  <script src="./js/App.js"></script>
 </body>
 </html>
