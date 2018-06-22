@@ -76,9 +76,41 @@ html,body{
     width: 100%;
 }
 
-.logo {
+.logo-wrap {
+    display: inline-block;
+    margin-top: 1%;
+    width: 85%;
+    opacity: 0.8;
+    text-align: center;
+}
 
+.logo-wrap div {
+    display: inline-block;
+    width: 100%;
+    overflow: hidden;
+    background: black;
+    height: 100%;
+    border-radius: 5px;
+    animation-name: slideout;
+    animation-duration: 5s;
+    animation-iteration-count: 1;
+}
+
+@keyframes slideout {
+    from {
+        width: 1%;
+
+    }
+    
+    to {
+        width: 100%;
+
+    }
+}
+
+.logo {
     font-size: 3em;
+    color: white;
 }
 
 .main-text {
