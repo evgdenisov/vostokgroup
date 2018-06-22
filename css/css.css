@@ -6,10 +6,9 @@
 }
 
 body {
-    background: gray;
     margin: 0px;
     text-align: center;
-    background-image: url("./flowers1.jpg")
+    background-image: url("./flowers1.jpg");
 }
 
 
