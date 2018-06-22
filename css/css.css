@@ -29,7 +29,7 @@ html,body{
 .header-wrap {
     display: inline-block;
     position: relative;
-    min-width: 85%;
+    width: 85%;
     margin-top: 1%;
     font-size: 0;
 }
