@@ -43,7 +43,7 @@ body {
     display: inline-block;
     min-width: 30%;
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     color: white;
     border-radius: 2rem;
     margin: 0.2rem;
@@ -54,30 +54,33 @@ body {
 
 .catalog-wrap {
     display: inline-block;
-    min-width: 30%;
+    min-width: 20%;
     position: relative;
+    margin: 0.2rem;
+    padding-left: 0.2rem;
+    padding-right: 0.2rem;
 }
 
 .catalog-pop-up {
     position: absolute;
     width: 200%;
-    height: 200px;
-    background: red;
+    background: white;
+    color: black;
     left: -50%;
     z-index: 200;
     font-size: 1.2rem;
+    border-radius: 5px;
+
 }
 
 .catalog-btn:hover {
-    border-color: white;
-    color: black;
     background: white;
+    color: black;
     cursor: pointer;
-    transition: all 0.7s ease
+    transition: all 0.7s ease;
 }
 
 .header-btn:hover {
-    border-color: white;
     color: black;
     background: white;
     cursor: pointer;
@@ -129,6 +132,10 @@ body {
     display: none;
 }
 
+.map-wrap {
+    display: inline-block;
+    width: 100%;
+}
 
 .map {
     display: inline-block;
@@ -150,7 +157,9 @@ body {
 
 .contacts-text {
     display: inline-block;
+    width: 100%;
     text-align: left;
+    padding-left: 2rem;
 }
 
 .vacancy-wrap {
@@ -186,14 +195,10 @@ body {
     margin-left: 1.5em;
 }
 
-.yandex-disk {
-    width: 150px;
+.dawnload {
+    width: 30%;
 }
 
-.yandex-disk:hover {
-
-    transition: all 0.7s ease;
-}
 
 a {
     text-decoration: none;
